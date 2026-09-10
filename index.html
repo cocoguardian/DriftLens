@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DRIFTLENS | Configuration Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">◈</div>
+
+        <div>
+            <h2>DRIFTLENS</h2>
+            <span>Config Intelligence</span>
+        </div>
+    </div>
+
+    <nav>
+
+        <button class="nav-item active" onclick="showSection('dashboard', this)">
+            <span>▦</span>
+            Dashboard
+        </button>
+
+        <button class="nav-item" onclick="showSection('scanner', this)">
+            <span>⌕</span>
+            Drift Scanner
+        </button>
+
+        <button class="nav-item" onclick="showSection('predictor', this)">
+            <span>◉</span>
+            Failure Predictor
+        </button>
+
+        <button class="nav-item" onclick="showSection('detective', this)">
+            <span>◌</span>
+            Drift Detective
+        </button>
+
+        <button class="nav-item" onclick="showSection('dependency', this)">
+            <span>⌘</span>
+            Dependency Map
+        </button>
+
+        <button class="nav-item" onclick="showSection('history', this)">
+            <span>◷</span>
+            Scan History
+        </button>
+
+        <button class="nav-item" onclick="showSection('security', this)">
+            <span>♢</span>
+            Secret Safety
+        </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="safe-status">
+            <div class="safe-symbol">✓</div>
+
+            <div>
+                <strong>SECRET SAFE</strong>
+                <small>Values never exposed</small>
+            </div>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+            <div class="eyebrow">CONFIGURATION INTELLIGENCE PLATFORM</div>
+
+            <h1 id="pageTitle">Dashboard</h1>
+
+            <p id="pageSubtitle">
+                See the drift before production sees it.
+            </p>
+        </div>
+
+        <div class="top-actions">
+
+            <div class="system-status">
+                <span class="pulse"></span>
+                SYSTEM READY
+            </div>
+
+            <button class="scan-main-btn" onclick="openUpload()">
+                <span>⌕</span>
+                Scan Project
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="section active">
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    PRE-DEPLOYMENT INTELLIGENCE
+                </div>
+
+                <h2>
+                    Find the problem.
+                    <br>
+                    <span>Predict the failure.</span>
+                </h2>
+
+                <p>
+                    Upload your project and DRIFTLENS analyzes
+                    code and configuration to detect drift,
+                    predict deployment risks and suggest safe actions.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="primary-btn" onclick="openUpload()">
+                        Upload & Scan Project
+                    </button>
+
+                    <button class="secondary-btn" onclick="showSection('predictor')">
+                        What-If Simulator
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="core">
+                    <span>◈</span>
+                    <small>SCAN</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">CRITICAL ISSUES</span>
+                    <span class="stat-icon danger">!</span>
+                </div>
+
+                <h2 id="criticalCount">0</h2>
+
+                <p>Require immediate attention</p>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">WARNINGS</span>
+                    <span class="stat-icon warning">!</span>
+                </div>
+
+                <h2 id="warningCount">0</h2>
+
+                <p>Potential configuration risks</p>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">TOTAL FINDINGS</span>
+                    <span class="stat-icon info">+</span>
+                </div>
+
+                <h2 id="totalCount">0</h2>
+
+                <p>Detected by latest scan</p>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">RISK SCORE</span>
+                    <span class="stat-icon score">◈</span>
+                </div>
+
+                <h2>
+                    <span id="riskScore">0</span>
+                    <small>/100</small>
+                </h2>
+
+                <p id="riskLabel">Waiting for scan</p>
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD PANELS -->
+
+        <div class="dashboard-columns">
+
+            <!-- RISK -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h3>Configuration Risk</h3>
+                        <p>Current deployment readiness</p>
+                    </div>
+
+                    <span class="live-badge">LIVE</span>
+
+                </div>
+
+                <div class="risk-section">
+
+                    <div class="risk-ring">
+
+                        <div>
+                            <strong id="riskRingValue">0</strong>
+                            <span>/100</span>
+                        </div>
+
+                    </div>
+
+                    <div class="risk-description">
+
+                        <h3 id="riskMessage">
+                            No scan yet
+                        </h3>
+
+                        <p id="riskDescription">
+                            Upload a project to calculate
+                            configuration risk.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ENVIRONMENT -->
+
+            <div class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h3>Environment Health</h3>
+                        <p>Configuration consistency</p>
+                    </div>
+
+                </div>
+
+                <div class="environment-list">
+
+                    <div class="environment-row">
+                        <div>
+                            <span class="env-dot dev"></span>
+                            Development
+                        </div>
+
+                        <strong class="healthy" id="devHealth">
+                            HEALTHY
+                        </strong>
+                    </div>
+
+                    <div class="environment-row">
+                        <div>
+                            <span class="env-dot staging"></span>
+                            Staging
+                        </div>
+
+                        <strong id="stagingHealth">
+                            UNKNOWN
+                        </strong>
+                    </div>
+
+                    <div class="environment-row">
+                        <div>
+                            <span class="env-dot prod"></span>
+                            Production
+                        </div>
+
+                        <strong id="prodHealth">
+                            UNKNOWN
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT FINDINGS -->
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <h3>Recent Findings</h3>
+                    <p>Latest detected issues</p>
+                </div>
+
+                <button class="link-btn" onclick="showSection('scanner')">
+                    View All →
+                </button>
+
+            </div>
+
+            <div id="recentFindings">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">⌕</div>
+
+                    <h3>Ready for your project</h3>
+
+                    <p>
+                        Upload a project and start your first scan.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SCANNER ================= -->
+
+    <section id="scanner" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">ANALYSIS ENGINE</div>
+
+                <h2>Drift Scanner</h2>
+
+                <p>
+                    Compare application configuration requirements
+                    across environments.
+                </p>
+            </div>
+
+            <button class="scan-main-btn" onclick="openUpload()">
+                ⌕ Scan Project
+            </button>
+
+        </div>
+
+
+        <div class="scan-summary">
+
+            <div>
+                <span>Files Scanned</span>
+                <strong id="filesScanned">0</strong>
+            </div>
+
+            <div>
+                <span>Config Keys</span>
+                <strong id="configKeys">0</strong>
+            </div>
+
+            <div>
+                <span>Languages</span>
+                <strong id="languagesDetected">0</strong>
+            </div>
+
+            <div>
+                <span>Scan Status</span>
+                <strong id="scanStatus">READY</strong>
+            </div>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <button class="filter active" onclick="filterFindings('all', this)">
+                All
+            </button>
+
+            <button class="filter" onclick="filterFindings('missing', this)">
+                🔴 Missing
+            </button>
+
+            <button class="filter" onclick="filterFindings('orphaned', this)">
+                🔵 Orphaned
+            </button>
+
+            <button class="filter" onclick="filterFindings('type-mismatch', this)">
+                🟡 Type Mismatch
+            </button>
+
+            <button class="filter" onclick="filterFindings('error', this)">
+                ⚠ Errors
+            </button>
+
+        </div>
+
+
+        <div id="findings">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">⌕</div>
+
+                <h3>No scan results</h3>
+
+                <p>
+                    Upload a project to begin analysis.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PREDICTOR ================= -->
+
+    <section id="predictor" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">PREDICTIVE ENGINE</div>
+
+                <h2>Failure Predictor</h2>
+
+                <p>
+                    What could happen if the current configuration
+                    is deployed?
+                </p>
+            </div>
+
+            <button class="secondary-btn" onclick="runPrediction()">
+                Run Prediction
+            </button>
+
+        </div>
+
+
+        <div class="prediction-hero">
+
+            <div class="prediction-icon">
+                ◉
+            </div>
+
+            <div>
+                <span class="tag">WHAT-IF DEPLOYMENT SIMULATOR</span>
+
+                <h2 id="predictionTitle">
+                    Waiting for scan
+                </h2>
+
+                <p id="predictionText">
+                    Run a project scan to generate
+                    deployment predictions.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="prediction-grid">
+
+            <div class="prediction-card">
+
+                <span class="prediction-number">01</span>
+
+                <h3>Current Problem</h3>
+
+                <p id="predictionProblem">
+                    No issue detected yet.
+                </p>
+
+            </div>
+
+
+            <div class="prediction-card">
+
+                <span class="prediction-number">02</span>
+
+                <h3>Possible Impact</h3>
+
+                <p id="predictionImpact">
+                    Scan your project first.
+                </p>
+
+            </div>
+
+
+            <div class="prediction-card">
+
+                <span class="prediction-number">03</span>
+
+                <h3>Deployment Result</h3>
+
+                <p id="predictionResult">
+                    Unknown
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHAT IF -->
+
+        <div class="panel what-if">
+
+            <div class="panel-heading">
+
+                <div>
+                    <h3>What If I Deploy Now?</h3>
+                    <p>Simulated deployment impact</p>
+                </div>
+
+                <button class="primary-btn" onclick="runPrediction()">
+                    Simulate
+                </button>
+
+            </div>
+
+            <div class="simulation-flow">
+
+                <div class="flow-node">
+                    <span>01</span>
+                    Current Code
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-node">
+                    <span>02</span>
+                    Configuration
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-node">
+                    <span>03</span>
+                    Deployment
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-node danger-node" id="simulationResult">
+                    <span>04</span>
+                    Unknown
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DETECTIVE ================= -->
+
+    <section id="detective" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">ROOT CAUSE ANALYSIS</div>
+
+                <h2>Drift Detective</h2>
+
+                <p>
+                    Understand how the configuration drift happened.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div id="detectiveContent">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">◌</div>
+
+                <h3>No finding selected</h3>
+
+                <p>
+                    Run a scan and select an issue to investigate.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DEPENDENCY ================= -->
+
+    <section id="dependency" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">SYSTEM RELATIONSHIPS</div>
+
+                <h2>Dependency Map</h2>
+
+                <p>
+                    See how code, configuration and environments
+                    are connected.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="dependency-map">
+
+            <div class="map-card code-map">
+
+                <span>💻</span>
+
+                <strong>Application Code</strong>
+
+                <small id="mapFiles">
+                    Project files
+                </small>
+
+            </div>
+
+
+            <div class="connector">↓</div>
+
+
+            <div class="map-card config-map">
+
+                <span>⚙</span>
+
+                <strong>Configuration Keys</strong>
+
+                <small id="mapKeys">
+                    Configuration references
+                </small>
+
+            </div>
+
+
+            <div class="connector">↓</div>
+
+
+            <div class="environment-map">
+
+                <div class="map-card">
+                    <span>🟢</span>
+                    <strong>DEV</strong>
+                    <small id="mapDev">Healthy</small>
+                </div>
+
+                <div class="map-card">
+                    <span>🟡</span>
+                    <strong>STAGING</strong>
+                    <small id="mapStaging">Unknown</small>
+                </div>
+
+                <div class="map-card">
+                    <span>🔴</span>
+                    <strong>PRODUCTION</strong>
+                    <small id="mapProd">Unknown</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <h3>Configuration Relationships</h3>
+                    <p>Detected project dependencies</p>
+                </div>
+
+            </div>
+
+            <div id="dependencyDetails">
+
+                <div class="empty-state small-empty">
+                    Run a scan to generate the dependency map.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HISTORY ================= -->
+
+    <section id="history" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">CONTINUOUS MONITORING</div>
+
+                <h2>Scan History</h2>
+
+                <p>
+                    Compare current and previous configuration scans.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div id="historyList">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">◷</div>
+
+                    <h3>No scan history</h3>
+
+                    <p>
+                        Your completed scans will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="no-repeat-card">
+
+            <div class="nr-icon">✓</div>
+
+            <div>
+                <h3>No-Repeat Alert Protection</h3>
+
+                <p>
+                    Unchanged findings are tracked as
+                    unresolved instead of creating duplicate alerts.
+                </p>
+            </div>
+
+            <strong>ACTIVE</strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SECURITY ================= -->
+
+    <section id="security" class="section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="eyebrow">SECURITY CENTER</div>
+
+                <h2>Secret Safety</h2>
+
+                <p>
+                    Configuration analysis without exposing
+                    sensitive values.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="security-grid">
+
+            <div class="security-card">
+
+                <div class="security-symbol">🔐</div>
+
+                <span>SECRET VALUES</span>
+
+                <h3>NEVER DISPLAYED</h3>
+
+                <p>
+                    DRIFTLENS works with configuration key names,
+                    status and metadata instead of exposing secret values.
+                </p>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <div class="security-symbol">🚫</div>
+
+                <span>RAW VALUES</span>
+
+                <h3>BLOCKED</h3>
+
+                <p>
+                    Passwords, API tokens and secret values
+                    are not shown in findings.
+                </p>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <div class="security-symbol">🛡</div>
+
+                <span>REPORTING</span>
+
+                <h3>SAFE MODE</h3>
+
+                <p>
+                    Reports focus on key names, locations,
+                    types and drift status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="security-banner">
+
+            <div>
+                <strong>Security Principle</strong>
+
+                <p>
+                    Detect configuration problems without
+                    leaking configuration secrets.
+                </p>
+            </div>
+
+            <span>SECURE ✓</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            <strong>DRIFTLENS</strong>
+            <span>Configuration Intelligence</span>
+        </div>
+
+        <div>
+            Detect • Predict • Protect
+        </div>
+
+    </footer>
+
+</main>
+
+
+<!-- ================= UPLOAD MODAL ================= -->
+
+<div id="uploadModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close-modal" onclick="closeUpload()">
+            ×
+        </button>
+
+        <div class="modal-symbol">
+            ↑
+        </div>
+
+        <h2>Upload Project</h2>
+
+        <p>
+            Upload your project files or a ZIP archive.
+        </p>
+
+
+        <label class="upload-area">
+
+            <input
+                type="file"
+                id="projectInput"
+                multiple
+                accept=".zip,.js,.jsx,.ts,.tsx,.py,.java,.c,.cpp,.h,.env,.yaml,.yml,.json,.properties,.txt"
+                onchange="handleFiles(this.files)">
+
+            <div class="upload-icon">
+                ↑
+            </div>
+
+            <strong>Choose project files</strong>
+
+            <span>
+                ZIP, JS, TS, Python, Java, C, YAML, JSON, ENV
+            </span>
+
+        </label>
+
+
+        <div id="selectedFiles" class="selected-files">
+            No files selected
+        </div>
+
+
+        <button
+            id="startScanModalBtn"
+            class="primary-btn full-btn"
+            onclick="startRealScan()">
+
+            Start Scan
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SCAN MODAL ================= -->
+
+<div id="scanModal" class="modal">
+
+    <div class="modal-box scanning-box">
+
+        <div class="scanner-animation">
+
+            <div class="scanner-ring"></div>
+
+            <span>◈</span>
+
+        </div>
+
+        <h2 id="scanTitle">
+            Scanning Project
+        </h2>
+
+        <p id="scanMessage">
+            Preparing analysis...
+        </p>
+
+        <div class="progress-track">
+
+            <div
+                id="progressBar"
+                class="progress-bar">
+            </div>
+
+        </div>
+
+        <strong id="progressText">0%</strong>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
